@@ -5,3 +5,8 @@ git remote -v
 git add .
 git status
 git push -u origin master
+
+#update
+git add .
+git commit -m "djaljd"
+git push

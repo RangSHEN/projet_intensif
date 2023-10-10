@@ -11,8 +11,8 @@
 
 
     <modules>
-        <module>selfstarter-acl</module>
-
+        <module>selfstarter-gestion</module>
+        <module>selfstarter-common</module>
     </modules>
 
 
