@@ -1,0 +1,7 @@
+git branch
+git remote
+git remote add origin https://github.com/RangSHEN/projet_intensif.git
+git remote -v
+git add .
+git status
+git push -u origin master
