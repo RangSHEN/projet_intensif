@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Data
-@AllArgsConstructor
 @Table(name = "roles")
 public class Role {
 
@@ -22,5 +23,17 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    private Set<User> users;
+    private Set<User> users = new HashSet<>();
+
+    public Role(String name) {
+        this.name = name;
+    }
+
+    public Role() {
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roleId, name);
+    }
 }

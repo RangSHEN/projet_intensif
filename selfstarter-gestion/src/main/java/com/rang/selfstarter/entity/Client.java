@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Data
@@ -29,8 +30,24 @@ public class Client {
     @Column(name = "is_premium", nullable = false, length = 64)
     private String isPremium;
 
+    @OneToMany(mappedBy = "entrepreneur", fetch = FetchType.LAZY)
+    private Set<Devis> devis;
+
+    @OneToMany(mappedBy = "entrepreneur", fetch = FetchType.LAZY)
+    private Set<Facture> factures;
+
 
     @OneToOne (cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
     private User user;
+
+    public Client(String firstName, String lastName, String isPremium) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isPremium = isPremium;
+    }
+
+    public Client() {
+
+    }
 }
