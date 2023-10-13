@@ -5,7 +5,6 @@ import com.rang.selfstarter.dao.UserDao;
 import com.rang.selfstarter.entity.Role;
 import com.rang.selfstarter.entity.User;
 import com.rang.selfstarter.service.UserService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

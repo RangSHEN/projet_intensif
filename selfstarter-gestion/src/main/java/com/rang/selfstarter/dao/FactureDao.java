@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface FactureDao extends JpaRepository<Facture,Long> {
 
+    @Query(value = "select f from Facture as f where f.factureName like %:keyword% ")
     Page<Facture> findFacturesByFactureNameContains(String keyword, Pageable pageable);
 
     @Query(value = "select f from Facture as f where f.entrepreneur.entrepreneurId =:entrepreneurId ")

@@ -50,7 +50,9 @@ public class DevisServiceImpl implements DevisService {
         Client client = clientDao.findById(devisDTO.getClient().getClientId()).orElseThrow(() -> new EntityNotFoundException("Entrepreneur with Id" + devisDTO.getClient().getClientId() + "Not Found"));
         devis.setEntrepreneur(entrepreneur);
         devis.setClient(client);
-        return devisMapper.fromDevis(devis);
+
+        Devis devisSave = devisDao.save(devis);
+        return devisMapper.fromDevis(devisSave);
     }
 
     @Override

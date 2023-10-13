@@ -44,10 +44,11 @@ public class FactureServiceImpl implements FactureService {
         Facture facture = factureMapper.fromFactureDTO(factureDTO);
         Entrepreneur entrepreneur = entrepreneurDao.findById(factureDTO.getEntrepreneur().getEntrepreneurId()).orElseThrow(
                 () -> new EntityNotFoundException("Entrepreneur with Id" + factureDTO.getEntrepreneur().getEntrepreneurId() + "Not Found"));
-        Client client = clientDao.findById(factureDTO.getClient().getClientId()).orElseThrow(() -> new EntityNotFoundException("Entrepreneur with Id" + factureDTO.getClient().getClientId() + "Not Found"));
         facture.setEntrepreneur(entrepreneur);
+        Client client = clientDao.findById(factureDTO.getClient().getClientId()).orElseThrow(() -> new EntityNotFoundException("Client with Id" + factureDTO.getClient().getClientId() + "Not Found"));
         facture.setClient(client);
-        return factureMapper.fromFacture(facture);
+        Facture factureSave = factureDao.save(facture);
+        return factureMapper.fromFacture(factureSave);
     }
 
     @Override
@@ -55,8 +56,8 @@ public class FactureServiceImpl implements FactureService {
         Facture facture = loadFactureById(factureDTO.getFactureId());
         Entrepreneur entrepreneur = entrepreneurDao.findById(factureDTO.getEntrepreneur().getEntrepreneurId()).orElseThrow(
                 () -> new EntityNotFoundException("Entrepreneur with Id" + factureDTO.getEntrepreneur().getEntrepreneurId() + "Not Found"));
-        Client client = clientDao.findById(factureDTO.getClient().getClientId()).orElseThrow(() -> new EntityNotFoundException("Entrepreneur with Id" + factureDTO.getClient().getClientId() + "Not Found"));
         facture.setEntrepreneur(entrepreneur);
+        Client client = clientDao.findById(factureDTO.getClient().getClientId()).orElseThrow(() -> new EntityNotFoundException("Client with Id" + factureDTO.getClient().getClientId() + "Not Found"));
         facture.setClient(client);
         Facture updatedFacture = factureDao.save(facture);
         return factureMapper.fromFacture(updatedFacture);
