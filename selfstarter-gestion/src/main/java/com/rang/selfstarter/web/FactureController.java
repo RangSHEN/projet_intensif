@@ -29,13 +29,13 @@ public class FactureController {
         factureService.removeFacture(factureId);
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public FactureDTO saveFacture(@RequestBody FactureDTO factureDTO){
 
         return factureService.createFacture(factureDTO);
     }
 
-    @PutMapping("/{factureId}")
+    @PutMapping("/update/{factureId}")
     public FactureDTO updateFacture(@RequestBody FactureDTO factureDTO, @PathVariable Long factureId){
 
         factureDTO.setFactureId(factureId);

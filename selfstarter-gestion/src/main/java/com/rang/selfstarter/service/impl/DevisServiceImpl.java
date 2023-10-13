@@ -56,7 +56,7 @@ public class DevisServiceImpl implements DevisService {
     }
 
     @Override
-    public DevisDTO updateFacture(DevisDTO devisDTO) {
+    public DevisDTO updateDevis(DevisDTO devisDTO) {
         Devis devis = loadDevisById(devisDTO.getDevisId());
         Entrepreneur entrepreneur = entrepreneurDao.findById(devisDTO.getEntrepreneur().getEntrepreneurId()).orElseThrow(
                 () -> new EntityNotFoundException("Entrepreneur with Id" + devisDTO.getEntrepreneur().getEntrepreneurId() + "Not Found"));

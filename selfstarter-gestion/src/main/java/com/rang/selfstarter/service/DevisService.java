@@ -12,7 +12,7 @@ public interface DevisService {
 
     DevisDTO createDevis(DevisDTO devisDTO);
 
-    DevisDTO updateFacture(DevisDTO devisDTO);
+    DevisDTO updateDevis(DevisDTO devisDTO);
 
     Page<DevisDTO> findDevisByDevisName(String keyword, int page, int size);
 
