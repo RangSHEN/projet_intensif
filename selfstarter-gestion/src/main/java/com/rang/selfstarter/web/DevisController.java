@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/devis")
+@CrossOrigin("*")
 public class DevisController {
 
     @Autowired
     private DevisService devisService;
 
     @GetMapping
-    public Page<DevisDTO> searchFactures(@RequestParam(name = "keyword", defaultValue = "") String keyword,
+    public Page<DevisDTO> searchDevis(@RequestParam(name = "keyword", defaultValue = "") String keyword,
                                          @RequestParam(name = "page", defaultValue = "0") int page,
                                          @RequestParam(name = "size", defaultValue = "5") int size){
 

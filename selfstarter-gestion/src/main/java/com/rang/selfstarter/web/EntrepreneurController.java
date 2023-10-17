@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/entrepreneur")
+@CrossOrigin("*")
 public class EntrepreneurController {
 
     @Autowired
