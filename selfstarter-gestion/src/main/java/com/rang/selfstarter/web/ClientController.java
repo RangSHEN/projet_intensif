@@ -13,6 +13,7 @@ import com.rang.selfstarter.service.FactureService;
 import com.rang.selfstarter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,6 +34,7 @@ public class ClientController {
     DevisService devisService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('Admin')")
     public Page<ClientDTO> searchClients(@RequestParam(name = "keyword", defaultValue = "") String keyword,
                                          @RequestParam(name = "page", defaultValue = "0") int page,
                                          @RequestParam(name = "size", defaultValue = "5") int size){
@@ -41,11 +43,13 @@ public class ClientController {
     }
 
     @DeleteMapping("/{clientId}")
+    @PreAuthorize("hasAuthority('Admin')")
     public void deleteClient(@PathVariable Long clientId){
         clientService.removeClient(clientId);
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('Admin')")
     public ClientDTO saveClient(@RequestBody ClientDTO clientDTO){
         User user = userService.loadUserByEmail(clientDTO.getUser().getEmail());
         if(user != null) throw new RuntimeException("Email already Exist");
@@ -54,12 +58,14 @@ public class ClientController {
 
 
     @PutMapping("/{clientId}")
+    @PreAuthorize("hasAnyAuthority('Admin','Client')")
     public ClientDTO updateClient(@RequestBody ClientDTO clientDTO, @PathVariable Long clientId){
         clientDTO.setClientId(clientId);
         return clientService.updateClient(clientDTO);
     }
 
     @GetMapping("/{clientId}/devis")
+    @PreAuthorize("hasAnyAuthority('Admin','Client')")
     public Page<DevisDTO> DevisByClientId(@PathVariable Long clientId,
                                              @RequestParam(name = "page", defaultValue = "0") int page,
                                              @RequestParam(name = "size", defaultValue = "5") int size){
@@ -69,6 +75,7 @@ public class ClientController {
     }
 
     @GetMapping("/{clientId}/factures")
+    @PreAuthorize("hasAnyAuthority('Admin','Client')")
     public Page<FactureDTO> FacturesByClientId(@PathVariable Long clientId,
                                              @RequestParam(name = "page", defaultValue = "0") int page,
                                              @RequestParam(name = "size", defaultValue = "5") int size){
@@ -78,6 +85,7 @@ public class ClientController {
     }
 
     @GetMapping("/find")
+    @PreAuthorize("hasAnyAuthority('Admin','Client')")
     public ClientDTO loadClientByEmail(@RequestParam(name = "email", defaultValue = "") String email){
         return clientService.loadClientByEmail(email);
     }

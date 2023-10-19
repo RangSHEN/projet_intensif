@@ -96,7 +96,7 @@ public class MyRunner implements CommandLineRunner {
             clientDTO.setClientId(2L);
             factureDTO.setClient(clientDTO);
             EntrepreneurDTO entrepreneurDTO = new EntrepreneurDTO();
-            entrepreneurDTO.setEntrepreneurId(8L);
+            entrepreneurDTO.setEntrepreneurId(7L);
             factureDTO.setEntrepreneur(entrepreneurDTO);
             factureService.createFacture(factureDTO);
         }
@@ -105,11 +105,11 @@ public class MyRunner implements CommandLineRunner {
 
     private ClientDTO createClient() {
         ClientDTO clientDTO = new ClientDTO();
-        clientDTO.setFirstName("clientFN2");
-        clientDTO.setLastName("clientLN2");
+        clientDTO.setFirstName("clientFN3");
+        clientDTO.setLastName("clientLN3");
         clientDTO.setIsPremium("yes");
         UserDTO userDTO = new UserDTO();
-        userDTO.setEmail("client2@gmail.com");
+        userDTO.setEmail("client3@gmail.com");
         userDTO.setPassword("12344");
         clientDTO.setUser(userDTO);
         return clientService.createClient(clientDTO);
